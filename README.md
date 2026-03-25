@@ -12,11 +12,11 @@
 ```bash
 git clone https://github.com/Gauntlet-Systems/robot-guide.git
 cd robot-guide
-npm start
+python -m http.server 8080
 # → open http://localhost:8080/demo/
 ```
 
-No install required — `npm start` uses `npx serve` which downloads on first run.
+No install required — Python 3 is all you need (comes pre-installed on most systems).
 
 **In VS Code / Cursor:** press **F5** to start the server and launch the demo in Chrome automatically.
 

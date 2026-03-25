@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "Embeddable AI-powered robot guide widget for websites",
   "scripts": {
-    "start": "npx serve . -p 8080 --no-clipboard",
-    "demo": "npx serve . -p 8080 --no-clipboard"
+    "start": "python -m http.server 8080",
+    "demo": "python -m http.server 8080"
   },
   "keywords": ["robot", "guide", "ai", "widget", "embeddable"],
   "license": "MIT",
