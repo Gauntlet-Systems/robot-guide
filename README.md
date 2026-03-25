@@ -47,9 +47,9 @@ const guide = RobotGuide.init({
     contact:  ["You made it this far — just say hi."],
   },
 
-  // Optional: live AI commentary
-  // POST { section, context } → { text }
-  aiEndpoint: '/api/section-explain',
+  // aiEndpoint: '/api/section-explain',
+  // Optional — POST { section, context } → { text }
+  // Fetches live AI commentary; falls back to static lines when omitted or null.
 
   draggable: true,
   scrollSpy: true,
