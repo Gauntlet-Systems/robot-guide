@@ -420,6 +420,7 @@
     return {
       moveTo:       (sectionId) => moveToSection(sectionId, true),
       say:          (text) => { const t = ++streamToken; startTalking(); setTimeout(() => typeText(text, t), 120); },
+      trigger:      (sectionId) => { activeSectionId = sectionId; moveToSection(sectionId, true); showCommentary(sectionId); },
       setPose:      setRobotPose,
       setSection:   (id) => { activeSectionId = id; },
       destroy:      () => { robot.remove(); document.body.classList.remove(cfg.bodyClass); },
