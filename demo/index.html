@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RobotGuide — Live Demo</title>
+  <link rel="stylesheet" href="../robot-guide.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f7fc;
+      color: #1a2a4a;
+      line-height: 1.6;
+    }
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e0e8f4;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(17,37,78,0.06);
+    }
+    header .logo { font-weight: 800; font-size: 1.1rem; color: #2761e6; letter-spacing: -.02em; }
+    header nav a { margin-left: 1.5rem; color: #37507c; text-decoration: none; font-size: .92rem; }
+    header nav a:hover { color: #2761e6; }
+    section {
+      min-height: 100vh;
+      padding: 5rem 2rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .kicker {
+      text-transform: uppercase; letter-spacing: .1em;
+      font-size: .75rem; color: #2761e6; font-weight: 700;
+      margin-bottom: .6rem;
+    }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 1rem; }
+    p  { color: #4a5f80; max-width: 620px; margin-bottom: 1rem; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem; margin-top: 2rem;
+    }
+    .card {
+      background: #fff; border: 1px solid #dce8f8;
+      border-radius: 12px; padding: 1.4rem;
+      box-shadow: 0 2px 8px rgba(17,37,78,0.05);
+    }
+    .card h3 { font-size: 1rem; margin-bottom: .4rem; }
+    .card p  { font-size: .87rem; margin: 0; }
+    code {
+      background: #eef3ff; border-radius: 4px;
+      padding: .15em .45em; font-size: .87em; color: #2761e6;
+    }
+    pre {
+      background: #1a2035; color: #c8d8f8;
+      border-radius: 10px; padding: 1.4rem;
+      overflow-x: auto; font-size: .85rem; line-height: 1.6;
+      margin: 1.5rem 0;
+    }
+    .btn {
+      display: inline-block; background: #2761e6; color: #fff;
+      padding: .6rem 1.4rem; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: .9rem; border: none; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn:hover { background: #1a4fc9; }
+    .btn-ghost {
+      background: transparent; color: #2761e6;
+      border: 1.5px solid #2761e6; margin-left: .75rem;
+    }
+    .btn-ghost:hover { background: #eef3ff; }
+    #hero { background: linear-gradient(135deg, #eef3ff 0%, #f4f7fc 100%); }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">🤖 RobotGuide</span>
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#features">Features</a>
+    <a href="#usage">Usage</a>
+    <a href="#api">API</a>
+    <a href="https://github.com/Gauntlet-Systems/robot-guide" target="_blank">GitHub</a>
+  </nav>
+</header>
+
+<section id="hero">
+  <p class="kicker">Open Source · MIT License</p>
+  <h2>An embeddable AI robot guide for any website.</h2>
+  <p>
+    RobotGuide adds a draggable, pose-reactive robot character to your site.
+    It follows scroll, reacts to mouse movement with 24 distinct poses,
+    types commentary as sections come into view, and optionally connects to
+    your AI backend for live-generated speech.
+  </p>
+  <p>
+    Two files. Zero dependencies. Works with any framework or plain HTML.
+  </p>
+  <a href="#usage" class="btn">Get Started</a>
+  <a href="https://github.com/Gauntlet-Systems/robot-guide" class="btn btn-ghost" target="_blank">View on GitHub</a>
+</section>
+
+<section id="features">
+  <p class="kicker">What it does</p>
+  <h2>Everything you need. Nothing you don't.</h2>
+  <p>Built as a single self-contained JS module with a companion CSS file.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🖱️ Mouse-reactive poses</h3>
+      <p>24 named poses that respond to mouse speed, direction, and proximity. Debounced so it doesn't flicker.</p>
+    </div>
+    <div class="card">
+      <h3>📜 Scroll spy</h3>
+      <p>Automatically moves to and comments on sections as they scroll into view. No setup beyond listing your section IDs.</p>
+    </div>
+    <div class="card">
+      <h3>✋ Draggable</h3>
+      <p>Users can drag the robot anywhere on screen. It stays pinned until they navigate to a new section.</p>
+    </div>
+    <div class="card">
+      <h3>🤖 AI commentary</h3>
+      <p>Point it at any POST endpoint and get live AI-generated speech. Falls back to your static lines if the endpoint is offline.</p>
+    </div>
+    <div class="card">
+      <h3>🎨 Fully themeable</h3>
+      <p>Bring your own character images. All styles are scoped to <code>.rg-active</code> — no conflicts with your existing CSS.</p>
+    </div>
+    <div class="card">
+      <h3>📦 Zero dependencies</h3>
+      <p>Vanilla JS. No React, no jQuery, no build step required. Drop in two files and call <code>RobotGuide.init()</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="usage">
+  <p class="kicker">Quick start</p>
+  <h2>Two files, one function call.</h2>
+  <p>Include the CSS in your <code>&lt;head&gt;</code> and the JS before <code>&lt;/body&gt;</code>.</p>
+
+  <pre><code>&lt;!-- 1. Styles --&gt;
+&lt;link rel="stylesheet" href="robot-guide.css" /&gt;
+
+&lt;!-- 2. Script --&gt;
+&lt;script src="robot-guide.js"&gt;&lt;/script&gt;
+
+&lt;!-- 3. Init --&gt;
+&lt;script&gt;
+const guide = RobotGuide.init({
+  sections: ['hero', 'features', 'pricing', 'contact'],
+
+  poses: {
+    basePath: '/your-images/robot-poses/',
+    // map defaults to the 24 named poses — override any subset
+  },
+
+  commentary: {
+    hero:     ["Welcome! I'll be your guide today."],
+    features: ["These features took a while to build. Worth it."],
+    pricing:  ["No hidden fees. Scout's honor."],
+    contact:  ["You made it this far — just say hi."],
+  },
+
+  // Optional: live AI commentary
+  aiEndpoint: '/api/section-explain',
+
+  draggable: true,
+  scrollSpy: true,
+});
+
+// Public API
+guide.say("Hello from the robot!");
+guide.moveTo('pricing');
+guide.setPose('happy-cheer');
+&lt;/script&gt;</code></pre>
+</section>
+
+<section id="api">
+  <p class="kicker">Reference</p>
+  <h2>Configuration &amp; API</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3><code>sections</code></h3>
+      <p>Array of element IDs the robot reacts to. Order determines scroll-spy priority.</p>
+    </div>
+    <div class="card">
+      <h3><code>poses.basePath</code></h3>
+      <p>Base URL prefix for pose images. Combine with the default <code>map</code> of 24 named poses.</p>
+    </div>
+    <div class="card">
+      <h3><code>commentary</code></h3>
+      <p>Object of <code>sectionId → string[]</code>. Lines cycle. Falls back to <code>"Interesting section."</code>.</p>
+    </div>
+    <div class="card">
+      <h3><code>aiEndpoint</code></h3>
+      <p>URL of a POST endpoint. Receives <code>{ section, context }</code>, expects <code>{ text }</code> in response.</p>
+    </div>
+    <div class="card">
+      <h3><code>guide.say(text)</code></h3>
+      <p>Make the robot say anything programmatically with the typewriter effect.</p>
+    </div>
+    <div class="card">
+      <h3><code>guide.moveTo(id)</code></h3>
+      <p>Programmatically move the robot to any section element by ID.</p>
+    </div>
+    <div class="card">
+      <h3><code>guide.setPose(name)</code></h3>
+      <p>Force a specific pose by name. See the full pose list in the README.</p>
+    </div>
+    <div class="card">
+      <h3><code>guide.destroy()</code></h3>
+      <p>Remove the robot from the page and clean up all listeners.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RobotGuide itself -->
+<link rel="stylesheet" href="../robot-guide.css" />
+<script src="../robot-guide.js"></script>
+<script>
+  const guide = RobotGuide.init({
+    sections: ['hero', 'features', 'usage', 'api'],
+    poses: {
+      basePath: '../poses/',
+    },
+    commentary: {
+      hero:     [
+        "Two files. No NPM install required. Wild concept.",
+        "The robot is also the demo. Very meta.",
+      ],
+      features: [
+        "24 poses. I counted. Twice.",
+        "Yes, I get angry if you move the mouse too fast.",
+      ],
+      usage: [
+        "It really is this simple. I was surprised too.",
+        "Copy that snippet. I'll wait.",
+      ],
+      api: [
+        "guide.say() is my personal favorite method.",
+        "destroy() feels a bit harsh but okay.",
+      ],
+    },
+    draggable: true,
+    scrollSpy: true,
+  });
+</script>
+
+</body>
+</html>

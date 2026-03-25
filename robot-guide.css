@@ -1,0 +1,155 @@
+/*!
+ * RobotGuide v0.1.0 — Styles
+ * https://github.com/Gauntlet-Systems/robot-guide
+ * MIT License — © 2026 Gauntlet Systems LLC
+ *
+ * All rules are scoped to .rg-active on <body> so the widget
+ * never conflicts with your existing styles.
+ */
+
+/* ── Guide container (fixed overlay) ─────────────────────────────────────── */
+.rg-active .rg-guide {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: none;
+  transform: translate3d(16px, 120px, 0);
+  /* no transition by default — added by JS when animated */
+}
+
+.rg-active .rg-guide.rg-animated {
+  transition: transform 0.46s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rg-active .rg-guide.rg-dragging {
+  transition: none !important;
+}
+
+/* ── Avatar bubble ────────────────────────────────────────────────────────── */
+.rg-active .rg-avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #7bb6ff 0%, #3b86ff 42%, #2a67ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  pointer-events: auto;
+  box-shadow:
+    0 8px 22px rgba(39, 97, 230, 0.36),
+    0 0 0 5px rgba(59, 134, 255, 0.11);
+  animation: rg-bob 3.4s ease-in-out infinite;
+  transition: box-shadow 0.2s;
+  touch-action: none;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.rg-active .rg-guide.rg-dragging .rg-avatar {
+  cursor: grabbing;
+}
+
+.rg-active .rg-avatar:hover {
+  box-shadow:
+    0 10px 26px rgba(39, 97, 230, 0.48),
+    0 0 0 7px rgba(59, 134, 255, 0.18);
+}
+
+.rg-active .rg-avatar.rg-talking {
+  box-shadow:
+    0 10px 26px rgba(39, 97, 230, 0.48),
+    0 0 0 7px rgba(59, 134, 255, 0.22);
+}
+
+.rg-active .rg-avatar img {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Speech bubble ────────────────────────────────────────────────────────── */
+.rg-active .rg-bubble {
+  min-width: 190px;
+  max-width: min(300px, calc(100vw - 106px));
+  background: #fff;
+  color: #37507c;
+  border: 1.5px solid #d8e3f6;
+  border-radius: 12px;
+  padding: 0.62rem 0.78rem;
+  font-size: 0.84rem;
+  line-height: 1.48;
+  font-family: "Bahnschrift", "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 22px rgba(17, 37, 78, 0.11);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.26s ease, transform 0.26s ease;
+  transform: translateX(-8px);
+  white-space: normal;
+  position: relative;
+}
+
+/* Tail pointing left toward avatar */
+.rg-active .rg-bubble::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-left: 1.5px solid #d8e3f6;
+  border-bottom: 1.5px solid #d8e3f6;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.rg-active .rg-bubble.rg-bubble-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Bob animation ────────────────────────────────────────────────────────── */
+@keyframes rg-bob {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-3px); }
+}
+
+/* ── Dark theme variant ───────────────────────────────────────────────────── */
+.rg-active.rg-dark .rg-bubble {
+  background: #1a2035;
+  color: #c8d8f8;
+  border-color: #2a3a60;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.rg-active.rg-dark .rg-bubble::before {
+  background: #1a2035;
+  border-color: #2a3a60;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .rg-active .rg-guide {
+    gap: 0.45rem;
+  }
+  .rg-active .rg-avatar {
+    width: 70px;
+    height: 70px;
+  }
+  .rg-active .rg-avatar img {
+    width: 60px;
+    height: 60px;
+  }
+  .rg-active .rg-bubble {
+    min-width: 150px;
+    max-width: min(220px, calc(100vw - 80px));
+  }
+}
