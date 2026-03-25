@@ -442,3 +442,18 @@
 
   return { init };
 }));
+
+// ── Auto-init from config file ─────────────────────────────────────────────
+// If robot-guide.config.js was loaded before this file and set
+// window.RobotGuideConfig, initialise automatically — no manual call needed.
+(function () {
+  if (typeof window.RobotGuideConfig === 'undefined') return;
+  function doInit() {
+    window.robotGuide = window.RobotGuide.init(window.RobotGuideConfig);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', doInit);
+  } else {
+    doInit();
+  }
+}());

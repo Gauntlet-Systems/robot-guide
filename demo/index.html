@@ -98,7 +98,7 @@
     your AI backend for live-generated speech.
   </p>
   <p>
-    Two files. Zero dependencies. Works with any framework or plain HTML.
+    One folder. Three HTML lines. Zero dependencies.
   </p>
   <a href="#usage" class="btn">Get Started</a>
   <a href="https://github.com/Gauntlet-Systems/robot-guide" class="btn btn-ghost" target="_blank">View on GitHub</a>
@@ -132,51 +132,62 @@
     </div>
     <div class="card">
       <h3>📦 Zero dependencies</h3>
-      <p>Vanilla JS. No React, no jQuery, no build step required. Drop in two files and call <code>RobotGuide.init()</code>.</p>
+      <p>Vanilla JS. No React, no jQuery, no build step required. Copy the folder, edit the config, done.</p>
     </div>
   </div>
 </section>
 
 <section id="usage">
   <p class="kicker">Quick start</p>
-  <h2>Two files, one function call.</h2>
-  <p>Include the CSS in your <code>&lt;head&gt;</code> and the JS before <code>&lt;/body&gt;</code>.</p>
+  <h2>One folder. One config file. Three HTML lines.</h2>
+  <p>
+    Copy the <code>robot-guide/</code> folder into your site root,
+    edit <code>robot-guide.config.js</code>, and add three lines to your HTML.
+    The robot initialises itself — no extra script required.
+  </p>
 
-  <pre><code>&lt;!-- 1. Styles --&gt;
-&lt;link rel="stylesheet" href="robot-guide.css" /&gt;
+  <pre><code>&lt;!-- Step 1: copy robot-guide/ folder into your site root --&gt;
+&lt;!-- Step 2: edit robot-guide/robot-guide.config.js         --&gt;
+&lt;!-- Step 3: add these three lines (order matters):         --&gt;
 
-&lt;!-- 2. Script --&gt;
-&lt;script src="robot-guide.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="robot-guide/robot-guide.css" /&gt;
+&lt;script src="robot-guide/robot-guide.config.js"&gt;&lt;/script&gt;
+&lt;script src="robot-guide/robot-guide.js"&gt;&lt;/script&gt;
 
-&lt;!-- 3. Init --&gt;
-&lt;script&gt;
-const guide = RobotGuide.init({
-  sections: ['hero', 'features', 'pricing', 'contact'],
+&lt;!-- That's it. The robot starts automatically. --&gt;</code></pre>
+
+  <p>Inside <code>robot-guide.config.js</code> you'll find:</p>
+
+  <pre><code>window.RobotGuideConfig = {
+
+  sections: ['hero', 'features', 'about', 'contact'],
 
   poses: {
-    basePath: '/your-images/robot-poses/',
-    // map defaults to the 24 named poses — override any subset
+    basePath: 'robot-guide/poses/',
   },
 
   commentary: {
-    hero:     ["Welcome! I'll be your guide today."],
-    features: ["These features took a while to build. Worth it."],
-    pricing:  ["No hidden fees. Scout's honor."],
-    contact:  ["You made it this far — just say hi."],
+    hero:    ['Your tagline. Very short.', 'Make it punchy.'],
+    contact: ['Just say hi.', 'One form. No spam.'],
   },
 
-  // Optional: live AI commentary
-  aiEndpoint: '/api/section-explain',
+  // aiEndpoint: '/api/section-explain',
+  // Optional — POST { section, context } → { text }
+  // Falls back to static commentary above when not set.
 
   draggable: true,
   scrollSpy: true,
-});
+  headerSelector: 'header',
+  sectionSnapOffsetX: -78,
 
-// Public API
-guide.say("Hello from the robot!");
-guide.moveTo('pricing');
-guide.setPose('happy-cheer');
-&lt;/script&gt;</code></pre>
+};</code></pre>
+
+  <p>Need to control the robot from your own JS? The public API is always available after init:</p>
+
+  <pre><code>window.robotGuide.trigger('contact');      // move + comment
+window.robotGuide.say('Custom text!');    // say anything
+window.robotGuide.setPose('happy-cheer'); // force a pose
+window.robotGuide.destroy();              // remove from page</code></pre>
 </section>
 
 <section id="api">
@@ -190,7 +201,7 @@ guide.setPose('happy-cheer');
     </div>
     <div class="card">
       <h3><code>poses.basePath</code></h3>
-      <p>Base URL prefix for pose images. Combine with the default <code>map</code> of 24 named poses.</p>
+      <p>Base URL prefix for pose images. Combine with the default map of 24 named poses.</p>
     </div>
     <div class="card">
       <h3><code>commentary</code></h3>
@@ -201,58 +212,27 @@ guide.setPose('happy-cheer');
       <p>URL of a POST endpoint. Receives <code>{ section, context }</code>, expects <code>{ text }</code> in response.</p>
     </div>
     <div class="card">
-      <h3><code>guide.say(text)</code></h3>
+      <h3><code>window.robotGuide.say(text)</code></h3>
       <p>Make the robot say anything programmatically with the typewriter effect.</p>
     </div>
     <div class="card">
-      <h3><code>guide.moveTo(id)</code></h3>
-      <p>Programmatically move the robot to any section element by ID.</p>
+      <h3><code>window.robotGuide.trigger(id)</code></h3>
+      <p>Move the robot to a section and trigger its commentary in one call.</p>
     </div>
     <div class="card">
-      <h3><code>guide.setPose(name)</code></h3>
+      <h3><code>window.robotGuide.setPose(name)</code></h3>
       <p>Force a specific pose by name. See the full pose list in the README.</p>
     </div>
     <div class="card">
-      <h3><code>guide.destroy()</code></h3>
+      <h3><code>window.robotGuide.destroy()</code></h3>
       <p>Remove the robot from the page and clean up all listeners.</p>
     </div>
   </div>
 </section>
 
-<!-- RobotGuide itself -->
-<link rel="stylesheet" href="../robot-guide.css" />
+<!-- RobotGuide — loaded via config file (this is also the demo) -->
+<script src="robot-guide.config.js"></script>
 <script src="../robot-guide.js"></script>
-<script>
-  const guide = RobotGuide.init({
-    sections: ['hero', 'features', 'usage', 'api'],
-    poses: {
-      basePath: '../poses/',
-    },
-    commentary: {
-      hero:     [
-        "Two files. No NPM install required. Wild concept.",
-        "The robot is also the demo. Very meta.",
-      ],
-      features: [
-        "24 poses. I counted. Twice.",
-        "Yes, I get angry if you move the mouse too fast.",
-      ],
-      usage: [
-        "It really is this simple. I was surprised too.",
-        "Copy that snippet. I'll wait.",
-      ],
-      api: [
-        "guide.say() is my personal favorite method.",
-        "destroy() feels a bit harsh but okay.",
-      ],
-    },
-    // aiEndpoint: '/api/section-explain',
-    // Optional — POST { section, context } → { text }
-    // Falls back to static commentary above when not set.
-    draggable: true,
-    scrollSpy: true,
-  });
-</script>
 
 </body>
 </html>

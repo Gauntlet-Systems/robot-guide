@@ -1,24 +1,9 @@
 # 🤖 RobotGuide
 
 > An embeddable AI-powered robot guide widget for websites.  
-> Two files. Zero dependencies. Works with any framework or plain HTML.
+> One folder. One config file. Three HTML lines.
 
 **[Live Demo →](https://gauntletsys.com)** · [Gauntlet Systems](https://gauntletsys.com) · MIT License
-
----
-
-## Run the demo locally
-
-```bash
-git clone https://github.com/Gauntlet-Systems/robot-guide.git
-cd robot-guide
-python -m http.server 8080
-# → open http://localhost:8080/demo/
-```
-
-No install required — Python 3 is all you need (comes pre-installed on most systems).
-
-**In VS Code / Cursor:** press **F5** to start the server and launch the demo in Chrome automatically.
 
 ---
 
@@ -32,34 +17,48 @@ RobotGuide adds a draggable character to your site that:
 - **Speaks with AI** — point it at any POST endpoint and get live-generated speech; falls back to static lines
 - **Drags anywhere** — users can pin it wherever they want
 
-No build step. No React. No jQuery. Drop in two files and call one function.
+No build step. No React. No jQuery. Copy one folder, edit one file.
 
 ---
 
 ## Quick start
 
+**Step 1** — Copy the `robot-guide/` folder into your site root.
+
+**Step 2** — Edit `robot-guide/robot-guide.config.js` with your sections and commentary.
+
+**Step 3** — Add these three lines to your HTML (order matters):
+
 ```html
-<!-- 1. Styles in <head> -->
-<link rel="stylesheet" href="robot-guide.css" />
+<link rel="stylesheet" href="robot-guide/robot-guide.css" />
+<script src="robot-guide/robot-guide.config.js"></script>
+<script src="robot-guide/robot-guide.js"></script>
+```
 
-<!-- 2. Script before </body> -->
-<script src="robot-guide.js"></script>
+That's it. The robot initialises automatically — no extra script required.
 
-<!-- 3. Init -->
-<script>
-const guide = RobotGuide.init({
+---
+
+### robot-guide.config.js
+
+This is the **only file you need to edit**. Everything lives here:
+
+```js
+window.RobotGuideConfig = {
+
   sections: ['hero', 'features', 'pricing', 'contact'],
 
   poses: {
-    basePath: '/images/robot-poses/',
-    // 24 named poses — override any subset via the map key
+    basePath: 'robot-guide/poses/',
+    // override individual poses if you bring your own images:
+    // map: { 'idle-stand': 'my-idle.png' }
   },
 
   commentary: {
-    hero:     ["Welcome! I'll be your guide today."],
-    features: ["These features took a while to build. Worth it."],
+    hero:     ["Welcome! I'm your guide."],
+    features: ["These took a while. Worth it."],
     pricing:  ["No hidden fees. Scout's honor."],
-    contact:  ["You made it this far — just say hi."],
+    contact:  ["You made it. Just say hi."],
   },
 
   // aiEndpoint: '/api/section-explain',
@@ -68,7 +67,43 @@ const guide = RobotGuide.init({
 
   draggable: true,
   scrollSpy: true,
-});
+  headerSelector: 'header, .site-header, nav',
+  sectionSnapOffsetX: -78,
+
+};
+```
+
+---
+
+### Controlling the robot from your own JS
+
+After auto-init, the public API is available on `window.robotGuide`:
+
+```js
+window.robotGuide.trigger('contact');      // move to section + comment
+window.robotGuide.say('Custom text!');    // say anything
+window.robotGuide.setPose('happy-cheer'); // force a pose
+window.robotGuide.destroy();              // remove from page
+```
+
+---
+
+### Manual init (advanced)
+
+If you prefer explicit control — or need to pass dynamic values — skip the config
+file and call `RobotGuide.init()` directly after loading the script:
+
+```html
+<link rel="stylesheet" href="robot-guide/robot-guide.css" />
+<script src="robot-guide/robot-guide.js"></script>
+<script>
+  const guide = RobotGuide.init({
+    sections: ['hero', 'features', 'contact'],
+    poses: { basePath: 'robot-guide/poses/' },
+    commentary: { hero: ['Hello!'] },
+    draggable: true,
+    scrollSpy: true,
+  });
 </script>
 ```
 
