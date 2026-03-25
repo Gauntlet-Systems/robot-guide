@@ -7,6 +7,21 @@
 
 ---
 
+## Run the demo locally
+
+```bash
+git clone https://github.com/Gauntlet-Systems/robot-guide.git
+cd robot-guide
+npm start
+# → open http://localhost:8080/demo/
+```
+
+No install required — `npm start` uses `npx serve` which downloads on first run.
+
+**In VS Code / Cursor:** press **F5** to start the server and launch the demo in Chrome automatically.
+
+---
+
 ## What it does
 
 RobotGuide adds a draggable character to your site that:

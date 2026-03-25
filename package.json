@@ -1,0 +1,12 @@
+{
+  "name": "robot-guide",
+  "version": "0.1.0",
+  "description": "Embeddable AI-powered robot guide widget for websites",
+  "scripts": {
+    "start": "npx serve . -p 8080 --no-clipboard",
+    "demo": "npx serve . -p 8080 --no-clipboard"
+  },
+  "keywords": ["robot", "guide", "ai", "widget", "embeddable"],
+  "license": "MIT",
+  "homepage": "https://github.com/Gauntlet-Systems/robot-guide"
+}
