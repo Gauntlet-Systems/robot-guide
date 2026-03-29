@@ -38,6 +38,11 @@ No build step. No React. No jQuery. Copy two folders, edit one file.
 
 That's it. The robot initialises automatically — no extra script required.
 
+Want the sample profile/demo page? Start with `robot-guide-custom-basic/index.html`.
+
+Need full config details (assistant actions, prompts, tokens, request payloads)?
+See the detailed reference: [CONFIG-REFERENCE.md](./CONFIG-REFERENCE.md).
+
 ---
 
 ### robot-guide.config.js
