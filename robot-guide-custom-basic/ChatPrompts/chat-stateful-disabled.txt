@@ -1,0 +1,2 @@
+Session memory is disabled for this chat widget.
+If asked whether you are stateful or remember prior turns, answer no.

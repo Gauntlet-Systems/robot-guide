@@ -1,0 +1,309 @@
+/*!
+ * RobotGuide v0.1.0 — Styles
+ * https://github.com/your-org/robot-guide
+ * MIT License
+ *
+ * All rules are scoped to .rg-active on <body> so the widget
+ * never conflicts with your existing styles.
+ */
+
+/* ── Guide container (fixed overlay) ─────────────────────────────────────── */
+.rg-active .rg-guide {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  pointer-events: none;
+  transform: translate3d(16px, 120px, 0);
+  --rg-avatar-size: 86px;
+  --rg-inline-offset-x: calc(var(--rg-avatar-size) + 0.38rem);
+  --rg-assist-width: 220px;
+  /* no transition by default — added by JS when animated */
+}
+
+.rg-active .rg-guide.rg-animated {
+  transition: transform 0.46s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rg-active .rg-guide.rg-dragging {
+  transition: none !important;
+}
+
+/* ── Avatar bubble ────────────────────────────────────────────────────────── */
+.rg-active .rg-avatar {
+  width: var(--rg-avatar-size);
+  height: var(--rg-avatar-size);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #7bb6ff 0%, #3b86ff 42%, #2a67ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  pointer-events: auto;
+  box-shadow:
+    0 8px 22px rgba(39, 97, 230, 0.36),
+    0 0 0 5px rgba(59, 134, 255, 0.11);
+  animation: rg-bob 3.4s ease-in-out infinite;
+  transition: box-shadow 0.2s;
+  touch-action: none;
+  user-select: none;
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.rg-active .rg-guide.rg-dragging .rg-avatar {
+  cursor: grabbing;
+}
+
+.rg-active .rg-avatar:hover {
+  box-shadow:
+    0 10px 26px rgba(39, 97, 230, 0.48),
+    0 0 0 7px rgba(59, 134, 255, 0.18);
+}
+
+.rg-active .rg-avatar.rg-talking {
+  box-shadow:
+    0 10px 26px rgba(39, 97, 230, 0.48),
+    0 0 0 7px rgba(59, 134, 255, 0.22);
+}
+
+.rg-active .rg-avatar.rg-assist-waiting,
+.rg-active .rg-avatar.rg-mood-waiting {
+  animation: rg-bob 3.4s ease-in-out infinite, rg-assist-pulse 0.95s ease-in-out infinite;
+}
+
+.rg-active .rg-avatar.rg-idle-alive {
+  animation: rg-bob 3.4s ease-in-out infinite, rg-idle-alive 2.6s ease-in-out infinite;
+}
+
+.rg-active .rg-avatar.rg-mood-answering {
+  box-shadow:
+    0 10px 26px rgba(39, 97, 230, 0.5),
+    0 0 0 9px rgba(88, 140, 255, 0.22);
+}
+
+.rg-active .rg-avatar.rg-mood-error {
+  box-shadow:
+    0 10px 26px rgba(220, 87, 87, 0.45),
+    0 0 0 8px rgba(237, 122, 122, 0.24);
+}
+
+.rg-active .rg-avatar img {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Speech bubble ────────────────────────────────────────────────────────── */
+.rg-active .rg-bubble {
+  min-width: 190px;
+  max-width: min(300px, calc(100vw - 106px));
+  background: #fff;
+  color: #37507c;
+  border: 1.5px solid #d8e3f6;
+  border-radius: 12px;
+  padding: 0.62rem 0.78rem;
+  font-size: 0.84rem;
+  line-height: 1.48;
+  font-family: "Bahnschrift", "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 22px rgba(17, 37, 78, 0.11);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.26s ease, transform 0.26s ease;
+  transform: translateX(-8px);
+  white-space: normal;
+  position: absolute;
+  left: calc(var(--rg-avatar-size) / 2);
+  top: 0;
+  transform: translate(-50%, calc(-100% - 0.78rem - 6px));
+}
+
+/* Top white bubble: pointer on bottom */
+.rg-active .rg-bubble::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: auto;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-right: 1.5px solid #d8e3f6;
+  border-bottom: 1.5px solid #d8e3f6;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.rg-active .rg-bubble.rg-bubble-visible {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 0.78rem));
+}
+
+.rg-active .rg-chat-bubble {
+  background: #fff7cc;
+  border-color: #e6d27a;
+  color: #5f4d12;
+  width: var(--rg-assist-width);
+  min-width: var(--rg-assist-width);
+  max-width: var(--rg-assist-width);
+  pointer-events: auto;
+  top: 0;
+  transform: translate(-50%, calc(-100% - 0.78rem - 6px));
+}
+
+.rg-active .rg-chat-bubble a {
+  color: #355ec5;
+  font-weight: 800;
+  text-decoration: underline;
+  pointer-events: auto;
+}
+
+.rg-active .rg-chat-bubble .rg-chat-action {
+  display: inline-block;
+  margin-top: 0.28rem;
+}
+
+.rg-active .rg-chat-bubble .rg-chat-action-sep {
+  color: #7a6a2c;
+  margin: 0 0.2rem;
+}
+
+/* Yellow bubble uses same tail position as white bubble */
+.rg-active .rg-chat-bubble::before {
+  background: #fff7cc;
+  left: 50%;
+  top: auto;
+  bottom: -7px;
+  border-right: 1.5px solid #e6d27a;
+  border-bottom: 1.5px solid #e6d27a;
+  border-left: none;
+  border-top: none;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* ── Bob animation ────────────────────────────────────────────────────────── */
+@keyframes rg-bob {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-3px); }
+}
+
+@keyframes rg-assist-pulse {
+  0%, 100% {
+    background: radial-gradient(circle at 35% 30%, #7bb6ff 0%, #3b86ff 42%, #2a67ff 100%);
+    box-shadow:
+      0 8px 22px rgba(39, 97, 230, 0.36),
+      0 0 0 5px rgba(59, 134, 255, 0.14);
+  }
+  50% {
+    background: radial-gradient(circle at 35% 30%, #98f0d3 0%, #45d19a 45%, #1ea66f 100%);
+    box-shadow:
+      0 10px 26px rgba(44, 170, 116, 0.55),
+      0 0 0 10px rgba(91, 216, 163, 0.22);
+  }
+}
+
+@keyframes rg-idle-alive {
+  0%, 100% { filter: saturate(1) brightness(1); }
+  50% { filter: saturate(1.08) brightness(1.04); }
+}
+
+/* ── Dark theme variant ───────────────────────────────────────────────────── */
+.rg-active.rg-dark .rg-bubble {
+  background: #1a2035;
+  color: #c8d8f8;
+  border-color: #2a3a60;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.rg-active.rg-dark .rg-bubble::before {
+  background: #1a2035;
+  border-color: #2a3a60;
+}
+
+/* ── Assistant input only (no history/panel) ─────────────────────────────── */
+.rg-active .rg-assist-widget {
+  position: absolute;
+  left: calc(var(--rg-avatar-size) / 2);
+  top: calc(var(--rg-avatar-size) + 0.38rem);
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.rg-active .rg-assist-inline {
+  width: var(--rg-assist-width);
+}
+
+.rg-active .rg-assist-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.24rem;
+  background: #ffffff;
+  border: 1px solid #cfddf4;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(25, 51, 98, 0.14);
+}
+
+.rg-active .rg-assist-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.42rem 0.62rem;
+  color: #254169;
+  font-size: 0.76rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.rg-active .rg-assist-send {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #2a67ff, #1e8fd9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rg-active .rg-assist-send:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .rg-active .rg-guide {
+    gap: 0.45rem;
+    --rg-avatar-size: 70px;
+    --rg-assist-width: 190px;
+  }
+  .rg-active .rg-avatar {
+    width: var(--rg-avatar-size);
+    height: var(--rg-avatar-size);
+  }
+  .rg-active .rg-avatar img {
+    width: 60px;
+    height: 60px;
+  }
+  .rg-active .rg-bubble {
+    min-width: 150px;
+    max-width: min(220px, calc(100vw - 80px));
+  }
+
+  /* iOS Safari auto-zooms focused inputs below 16px font size */
+  .rg-active .rg-assist-input {
+    font-size: 16px;
+  }
+}

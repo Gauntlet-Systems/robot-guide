@@ -1,7 +1,7 @@
 # 🤖 RobotGuide
 
 > An embeddable AI-powered robot guide widget for websites.  
-> One folder. One config file. Three HTML lines.
+> Two folders. One config file. Three HTML lines.
 
 **[Live Demo →](https://gauntletsys.com)** · [Gauntlet Systems](https://gauntletsys.com) · MIT License
 
@@ -15,17 +15,18 @@ RobotGuide adds a draggable character to your site that:
 - **Reacts to mouse movement** — 24 distinct named poses driven by mouse speed, direction, and proximity
 - **Types commentary** — speech bubble with typewriter effect, one quip per section, cycling
 - **Speaks with AI** — point it at any POST endpoint and get live-generated speech; falls back to static lines
+- **Includes optional Chat UI** — a compact input under the robot and a dedicated response bubble
 - **Drags anywhere** — users can pin it wherever they want
 
-No build step. No React. No jQuery. Copy one folder, edit one file.
+No build step. No React. No jQuery. Copy two folders, edit one file.
 
 ---
 
 ## Quick start
 
-**Step 1** — Copy the `robot-guide/` folder into your site root.
+**Step 1** — Copy both `robot-guide/` and `robot-guide-custom-basic/` into your site root.
 
-**Step 2** — Edit `robot-guide/robot-guide.config.js` with your sections and commentary.
+**Step 2** — Keep `robot-guide/robot-guide.config.js` pointed at `robot-guide-custom-basic`, then edit `robot-guide-custom-basic/robot-guide.custom.js` for your sections, commentary, and assistant behavior.
 
 **Step 3** — Add these three lines to your HTML (order matters):
 
@@ -41,35 +42,15 @@ That's it. The robot initialises automatically — no extra script required.
 
 ### robot-guide.config.js
 
-This is the **only file you need to edit**. Everything lives here:
+This file is the bootstrap selector for the active custom profile:
 
 ```js
 window.RobotGuideConfig = {
-
-  sections: ['hero', 'features', 'pricing', 'contact'],
-
-  poses: {
-    basePath: 'robot-guide/poses/',
-    // override individual poses if you bring your own images:
-    // map: { 'idle-stand': 'my-idle.png' }
-  },
-
-  commentary: {
-    hero:     ["Welcome! I'm your guide."],
-    features: ["These took a while. Worth it."],
-    pricing:  ["No hidden fees. Scout's honor."],
-    contact:  ["You made it. Just say hi."],
-  },
-
-  // aiEndpoint: '/api/section-explain',
-  // Optional — POST { section, context } → { text }
-  // Fetches live AI commentary; falls back to static lines when omitted or null.
-
-  draggable: true,
-  scrollSpy: true,
-  headerSelector: 'header, .site-header, nav',
-  sectionSnapOffsetX: -78,
-
+  businessSpecific: {
+    enabled: true,
+    folderName: 'robot-guide-custom-basic',
+    configFileName: 'robot-guide.custom.js'
+  }
 };
 ```
 
@@ -119,6 +100,8 @@ file and call `RobotGuide.init()` directly after loading the script:
 | `fallbackImage` | `string` | `null` | Image shown if a pose fails to load |
 | `commentary` | `object` | `{}` | `sectionId → string[]` lines, cycling |
 | `aiEndpoint` | `string` | `null` | POST endpoint for live AI commentary |
+| `assistant.enabled` | `boolean` | `false` | Show/hide built-in assistant input |
+| `assistant.endpoint` | `string` | `'/api/chat'` | POST endpoint for chat (`{ message } -> { reply }`) |
 | `draggable` | `boolean` | `true` | Allow drag to reposition |
 | `scrollSpy` | `boolean` | `true` | Auto-move on scroll |
 | `sectionSnapOffsetX` | `number` | `-78` | Pixel offset left of section heading |

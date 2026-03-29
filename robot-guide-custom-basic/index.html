@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lamborghini Sample - Robot Guide</title>
+  <link rel="stylesheet" href="../robot-guide/robot-guide.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, sans-serif;
+      background: #080808;
+      color: #f5f5f5;
+      line-height: 1.45;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(14, 14, 14, 0.95);
+      border-bottom: 1px solid #2f2f2f;
+      padding: 14px 20px;
+    }
+    .brand {
+      display: inline-block;
+      margin-right: 14px;
+      font-weight: 700;
+      color: #ffd54f;
+    }
+    .site-header a {
+      color: #f2f2f2;
+      margin-right: 10px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .site-header a:hover { color: #ffd54f; }
+    main { max-width: 1080px; margin: 0 auto; padding: 24px 16px 120px; }
+    section {
+      background: linear-gradient(180deg, #171717, #111111);
+      border: 1px solid #2f2f2f;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.24);
+      min-height: 180px;
+    }
+    h1, h2 { margin: 0 0 10px; color: #ffffff; }
+    .tag { color: #ffd54f; font-size: 13px; }
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 12px;
+    }
+    .card {
+      border: 1px solid #3a3a3a;
+      border-radius: 10px;
+      background: #1a1a1a;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <span class="brand">Lamborghini Showcase</span>
+    <a href="#hero">Overview</a>
+    <a href="#design">Design</a>
+    <a href="#performance">Performance</a>
+    <a href="#aerodynamics">Aerodynamics</a>
+    <a href="#interior">Interior</a>
+    <a href="#technology">Technology</a>
+    <a href="#heritage">Heritage</a>
+    <a href="#specs">Specs</a>
+  </header>
+
+  <main>
+    <section id="hero">
+      <p class="tag">Sports Car Sample Theme</p>
+      <h1>Lamborghini: engineered drama and precision</h1>
+      <p>This sample page demonstrates Robot Guide with an automotive showcase theme.</p>
+      <p>Try asking: "what can you do", "go to performance", or "go to specs".</p>
+    </section>
+
+    <section id="design">
+      <h2>Design</h2>
+      <div class="grid">
+        <div class="card"><strong>Silhouette</strong><br>Low profile, sharp shoulder lines, and an unmistakable wedge stance.</div>
+        <div class="card"><strong>Lighting</strong><br>Signature Y-shaped LED accents emphasize aggression and identity.</div>
+        <div class="card"><strong>Materials</strong><br>Carbon fiber elements balance rigidity with lightweight intent.</div>
+      </div>
+    </section>
+
+    <section id="performance">
+      <h2>Performance</h2>
+      <div class="grid">
+        <div class="card"><strong>Engine</strong><br>Naturally aspirated V12 character with immediate throttle response.</div>
+        <div class="card"><strong>Acceleration</strong><br>Explosive launch behavior paired with all-wheel-drive grip.</div>
+        <div class="card"><strong>Top Speed</strong><br>High-speed stability tuned for supercar confidence.</div>
+      </div>
+    </section>
+
+    <section id="aerodynamics">
+      <h2>Aerodynamics</h2>
+      <p>Front splitters, underbody airflow management, and rear aero surfaces work together to increase stability and downforce.</p>
+    </section>
+
+    <section id="interior">
+      <h2>Interior</h2>
+      <p>A driver-first cockpit with performance seats, tactile controls, and premium materials designed for focused driving.</p>
+    </section>
+
+    <section id="technology">
+      <h2>Technology</h2>
+      <p>Integrated telemetry, multiple drive modes, and digital instrumentation keep the vehicle adaptable on road and track.</p>
+    </section>
+
+    <section id="heritage">
+      <h2>Heritage</h2>
+      <p>From iconic V12 legends to modern hybrid-era engineering, Lamborghini design language remains unmistakable.</p>
+    </section>
+
+    <section id="specs">
+      <h2>Key Specs</h2>
+      <div class="grid">
+        <div class="card"><strong>Powertrain</strong><br>V12-based architecture (sample)</div>
+        <div class="card"><strong>0-60 mph</strong><br>Approx. sub-3-second class (sample)</div>
+        <div class="card"><strong>Drivetrain</strong><br>All-wheel drive (sample)</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Lamborghini sample config: standalone and aligned with robot-guide-custom-basic theme.
+    window.RobotGuideConfig = {
+      businessSpecific: { enabled: false },
+      sections: ['hero', 'design', 'performance', 'aerodynamics', 'interior', 'technology', 'heritage', 'specs'],
+      poses: { basePath: '../robot-guide/poses/' },
+      fallbackImage: '../robot-guide/poses/idle-stand.png',
+      bubbleTimeout: 10000,
+      commentary: {
+        hero: ['Welcome to the Lamborghini sample showroom.', 'Ask me for specs, performance, or design details.'],
+        design: ['This section covers the sculpted body lines and signature stance.'],
+        performance: ['This section focuses on powertrain, acceleration, and top speed.'],
+        aerodynamics: ['This section explains airflow channels and downforce strategy.'],
+        interior: ['This section highlights cockpit materials and driver-first ergonomics.'],
+        technology: ['This section covers telemetry, drive modes, and digital controls.'],
+        heritage: ['This section reviews iconic lineage and motorsport-inspired DNA.'],
+        specs: ['This section summarizes key numbers in one place.']
+      },
+      assistant: {
+        enabled: true,
+        endpoint: '/api/chat',
+        title: 'Car Guide',
+        welcome: 'Welcome to the Lamborghini showcase. Ask me about styling, specs, or performance.',
+        placeholder: 'Ask about design, V12 performance, aerodynamics, and specs...',
+        stateful: true,
+        actionLinksEnabled: true,
+        autoOpenContactOnContactIntent: false,
+        autoSendOnBlur: true,
+        githubUrl: 'https://www.lamborghini.com',
+        actionsMatrix: {
+          definitions: {
+            showCapabilities: { isEnabled: true, triggerPhrases: ['what can you do', 'help', 'capabilities'], jsFunctionCalled: 'showCapabilities', capabilityLabel: 'Show capabilities', displaySequence: 1 },
+            openWebsite: { isEnabled: true, triggerPhrases: ['open lamborghini site', 'official website', 'open website'], jsFunctionCalled: 'openGithub', capabilityLabel: 'Open official website', displaySequence: 2 },
+            goPerformance: { isEnabled: true, triggerPhrases: ['go to performance', 'show performance'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'performance', capabilityLabel: 'Go to Performance', displaySequence: 3 }
+          },
+          dynamicNavigation: {
+            routes: [
+              { isEnabled: true, triggerPhrases: ['go to overview', 'go to hero'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'hero' },
+              { isEnabled: true, triggerPhrases: ['go to design'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'design' },
+              { isEnabled: true, triggerPhrases: ['go to performance'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'performance' },
+              { isEnabled: true, triggerPhrases: ['go to aerodynamics'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'aerodynamics' },
+              { isEnabled: true, triggerPhrases: ['go to interior'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'interior' },
+              { isEnabled: true, triggerPhrases: ['go to technology'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'technology' },
+              { isEnabled: true, triggerPhrases: ['go to heritage'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'heritage' },
+              { isEnabled: true, triggerPhrases: ['go to specs'], jsFunctionCalled: 'goSection', jsFunctionParamsCsv: 'specs' }
+            ]
+          }
+        },
+        prompts: {
+          capabilitiesIntro: 'I can explain Lamborghini design, performance, and specs, navigate sections, and open the official website with confirmation.',
+          openExternalConfirm: 'Want me to open the official Lamborghini website in a new tab?',
+          sectionMissing: "I couldn't find that car section on this page."
+        },
+        errorReply: 'Connection error. Please try again in a moment.'
+      },
+      tracking: { enabled: false },
+      draggable: true,
+      scrollSpy: true,
+      headerSelector: '.site-header',
+      sectionSnapOffsetX: -90,
+      positioning: { mode: 'bottom-center', dockBottomMargin: 20, dockOffsetX: 0 },
+      iosKeyboard: { enabled: true, mobileBreakpoint: 991, focusDockBottomMargin: 104, lockWhileTyping: true }
+    };
+
+    window.RobotGuideActionHandler = {
+      showCapabilities: ({ prompts }) => ({ ok: true, silent: false, reply: prompts.capabilitiesIntro || 'Here is what I can do right now:' }),
+      openGithub: ({ assistant, prompts, helpers }) => helpers.requestExternalOpen({
+        url: assistant.githubUrl || 'https://www.lamborghini.com',
+        label: 'Official Lamborghini website',
+        confirmText: prompts.openExternalConfirm || 'Want me to open this in a new tab?'
+      }),
+      goSection: ({ intent, prompts, helpers }) => {
+        const sectionId = intent.sectionId || intent.params?.sectionId;
+        const ok = helpers.navigateToSection(sectionId);
+        return { ok, silent: ok, reply: ok ? '' : (prompts.sectionMissing || "I couldn't find that section on this page.") };
+      }
+    };
+  </script>
+  <script src="../robot-guide/robot-guide.js"></script>
+</body>
+</html>
